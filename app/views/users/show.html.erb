@@ -9,6 +9,8 @@
           <a class="edit-profile" href="<%= edit_user_path(current_user) %>">
             <button>Edit Profile</button>
            </a>
+           <a class="edit-profile" href="<%= new_post_path(current_user) %>">
+             <button>Create Post</button></a>
          </div>
 </div>
 
@@ -16,7 +18,9 @@
   <div class="profile row">
     <div class="col-md-4 avatar">
       <div class="wrapper">
-        <img src="images/user_profile.jpg">
+        <% if current_user.avatar.attached? %>
+          <%= image_tag current_user.avatar %>
+        <%end %>
       </div>
     </div>
 
@@ -50,7 +54,10 @@
 <div class="user-images">
   <% @posts.each do |post|%>
     <div class="wrapper">
+    <%=link_to post_path(post) do %>
       <%=image_tag post.image %>
+      <% end %>
     </div>
   <% end %>
+
 </div>
